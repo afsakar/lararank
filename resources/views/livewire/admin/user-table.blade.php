@@ -49,7 +49,7 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group">
-                        @if(permission_check('users', 'edit'))
+                        @if($user->id == auth()->user()->id || permission_check('users', 'edit'))
                             <a href="@if($user->id == auth()->user()->id) {{ route('users.profile') }} @else {{ route('users.edit', $user->id) }} @endif" class="btn btn-primary btn-icon btn-sm">
                                 <i class="fa fa-edit"></i>
                             </a>

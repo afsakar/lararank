@@ -28,13 +28,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/verify-email', [AdminController::class, 'verifyEmail'])->name('verify.email');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-
 $enableViews = config('fortify.views', true);
 if ($enableViews) {
     Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])->middleware(['auth'])->name('verification.notice');

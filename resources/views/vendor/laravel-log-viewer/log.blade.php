@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col-md-10">
-                        <div class="table-responsive">
+                        <div class="table-responsive table-container">
                             @if ($logs === null)
                                 <div>
                                     Log file >50M, please download it.
@@ -93,11 +93,26 @@
                                                 <td class="nowrap text-{{{$log['level_class']}}}">
                                                     <span class="fa fa-{{{$log['level_img']}}}" aria-hidden="true"></span>&nbsp;&nbsp;{{$log['level']}}
                                                 </td>
-                                                <td class="text">{{$log['context']}}</td>
+                                                <td class="text">{!! $log['context'] !!}</td>
                                             @endif
                                             <td class="date">{{{$log['date']}}}</td>
                                             <td class="text">
-                                                {{$log['text']}}
+                                                @if ($log['stack'])
+                                                    <button type="button"
+                                                            class="float-right expand btn btn-outline-dark btn-sm mb-2 ml-2"
+                                                            data-display="stack{{{$key}}}">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                @endif
+                                                {!! $log['text'] !!}
+                                                @if (isset($log['in_file']))
+                                                    <br/>{{{$log['in_file']}}}
+                                                @endif
+                                                @if ($log['stack'])
+                                                    <div class="stack" id="stack{{{$key}}}"
+                                                         style="display: none; white-space: pre-wrap;">{{{ trim($log['stack']) }}}
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -127,8 +142,8 @@
 
 @section('script')
     <!-- Datatables -->
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.table-container tr').on('click', function () {

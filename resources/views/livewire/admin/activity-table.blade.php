@@ -64,11 +64,11 @@
                         <td>{{ $activity->description }}</td>
                         <td>
                             @if($activity->user)
-                            <img src="{{ $activity->user->profile_photo_url }}" alt="{{ $activity->user->name }}" width="30" class="rounded-circle mr-1"> {{ $activity->user->name }}
+                            <img src="{{ $activity->user->profile_photo_url }}" alt="{{ $activity->user->name }}" width="30" class="rounded-circle mr-1" data-placement="top" data-toggle="tooltip" title="{{ $activity->user->email }}"> {{ $activity->user->name }}
                             @else
                                 @php $user = \App\Models\User::where('id', $activity->subject_id)->first() @endphp
 
-                                <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" width="30" class="rounded-circle mr-1"> {{ $user->name }}
+                                <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" width="30" class="rounded-circle mr-1" data-placement="top" data-toggle="tooltip" title="{{ $user->email }}"> {{ $user->name }}
 
                             @endif
                         </td>
