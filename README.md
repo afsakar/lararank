@@ -21,7 +21,7 @@ Dynamically, the menus are composed of the <code>config/menu.php</code> file.
 > **Important note!**
 > *Important note! Since the permissions section is based on this file, you must add at least one action to each module. When you creating a drop-down menu, you do not have to give the route and gate in the menu title.*
 
-- Example;
+Example;
 
 ```jsonld=
 ...
@@ -72,6 +72,35 @@ Dynamically, the menus are composed of the <code>config/menu.php</code> file.
 You can authorize users directly or through the role.
 
 To authorize a user with the help of a role, leave all the options in the authorization tab of the user editing page blank.
+
+#### Route usage;
+
+```injectablephp=
+
+Route::get('/users/create', [UserController::class, 'create'])->middleware('PermissionCheck:users,create')->name('users.create'); 
+
+```
+
+#### View usage;
+
+To manage permissions through the view, simply call the function called permission_check().
+
+You can find this function in the file at app/Http/Helpers.php.
+
+The function takes two parameters. The first parameter is the "gate" value of the menu items in the config/menu.php file. The other parameter specifies the actions in the "permissions" parameters in the same menu file.
+
+
+```injectablephp=
+
+@if(permission_check('users', 'create'))
+    <div class="section-header-button">
+        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i> Kullanıcı Ekle
+        </a>
+    </div>
+@endif
+
+```
 
 > **Important note!** 
 > If at least one authorization is marked on the user-specific authorization page, the user will be subject to authorization control according to the data coming from here.

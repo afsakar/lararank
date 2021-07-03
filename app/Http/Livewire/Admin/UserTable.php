@@ -10,7 +10,7 @@ class UserTable extends Component
 {
     use WithPagination;
 
-    public $sortField = 'name';
+    public $sortField = 'created_at';
     public $sortAsc = true;
     public $search = '';
     protected $paginationTheme = 'bootstrap';
@@ -41,7 +41,7 @@ class UserTable extends Component
     {
         return view('livewire.admin.user-table', [
             'users' => User::search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
                 ->paginate($this->value),
         ]);
     }

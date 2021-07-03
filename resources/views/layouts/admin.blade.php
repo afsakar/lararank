@@ -23,13 +23,13 @@
     </style>
 
     <!-- Start GA -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=*****"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-94034622-3');
+        gtag('config', '*****');
     </script>
     <!-- /END GA -->
 

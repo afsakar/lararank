@@ -120,10 +120,8 @@ function send_notify($type, $title, $message)
         'message' => $message
     ];
 
-    $send = $pusher->trigger('notify-channel', 'App\\Events\\Notify', $data);
-
-    if($send){
-
+    if(auth()->user()->role_id != 1){
+        $pusher->trigger('notify-channel', 'App\\Events\\Notify', $data);
     }
 
 }

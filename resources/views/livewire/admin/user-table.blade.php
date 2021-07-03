@@ -33,6 +33,12 @@
                     @include('admin.includes.sort-icon', ['field' => 'role_id'])
                 </a>
             </th>
+            <th class="text-center">
+                <a wire:click.prevent="sortBy('created_at')" class="text-black" role="button" href="#">
+                    Kayıt Tarihi
+                    @include('admin.includes.sort-icon', ['field' => 'created_at'])
+                </a>
+            </th>
             <th class="text-center text-black">İşlemler</th>
         </tr>
         </thead>
@@ -47,6 +53,7 @@
                 <td class="text-center text-capitalize">
                     <span class="badge badge-primary">{{ $user->role->name }}</span>
                 </td>
+                <td class="text-center">{{ $user->created_at != "" ? $user->created_at->diffForHumans() : "-" }}</td>
                 <td class="text-center">
                     <div class="btn-group">
                         @if($user->id == auth()->user()->id || permission_check('users', 'edit'))

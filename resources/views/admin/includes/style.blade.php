@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="{{ admin_asset('modules/bootstrap-iconpicker/dist/css/bootstrap-iconpicker.min.css') }}">
 
 <!-- Template CSS -->
+<link rel="stylesheet" href="{{ admin_asset('css/skins/reverse.css') }}">
 <link rel="stylesheet" href="{{ admin_asset('css/style.css') }}">
 <link rel="stylesheet" href="{{ admin_asset('css/components.css') }}">
 <style>
