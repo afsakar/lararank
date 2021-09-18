@@ -31,6 +31,9 @@
                                             <li class="nav-item mr-2">
                                                 <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">Genel</a>
                                             </li>
+                                            <li class="nav-item mr-2" id="password_tab">
+                                                <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Parola</a>
+                                            </li>
                                             <li class="nav-item mr-2" id="permissions_tab">
                                                 <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="false">Yetkiler</a>
                                             </li>
@@ -52,6 +55,16 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Tipi</label>
+                                                    <select class="form-control selectric" id="role_id" name="role_id">
+                                                        @foreach(\App\Models\Role::all() as $role)
+                                                            <option @if(old('role_id', $user->role_id) == $role->id) selected @endif value="{{ $role->id }}">{{ $role->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password">
+                                                <div class="form-group">
                                                     <label>Şifre</label>
                                                     <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                                                     @error('password')
@@ -64,14 +77,6 @@
                                                     @error('password_confirmation')
                                                     <div class="text-danger"> {{ $message }} </div>
                                                     @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Tipi</label>
-                                                    <select class="form-control selectric" id="role_id" name="role_id">
-                                                        @foreach(\App\Models\Role::all() as $role)
-                                                            <option @if(old('role_id', $user->role_id) == $role->id) selected @endif value="{{ $role->id }}">{{ $role->name }}</option>
-                                                        @endforeach
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions">

@@ -8,9 +8,12 @@
                     <option value="25">25</option>
                 </select>
             </h4>
-            <form class="card-header-form">
-                <input type="text" class="form-control form-control-sm" placeholder="Ara..." wire:model="search" />
-            </form>
+            <div class="card-header-form">
+                <form class="form-inline">
+                    <button class="btn btn-sm btn-danger mr-3" id="deleteSelected" style="display:none;">Seçilenleri Sil</button>
+                    <input type="text" class="form-control form-control-sm" placeholder="Ara..." wire:model="search" />
+                </form>
+            </div>
         </div>
     @if($activities->count() != 0)
 
@@ -18,6 +21,12 @@
             <table class="table table-hover text-nowrap">
                 <thead>
                 <tr>
+                    <th class="text-center">
+                        <div class="custom-checkbox custom-control">
+                            <input type="checkbox" data-checkboxes="activityTable" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
+                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                        </div>
+                    </th>
                     <th class="text-center text-black">#</th>
                     <th>
                         <a wire:click.prevent="sortBy('log_name')" class="text-black" role="button" href="#">
@@ -49,6 +58,12 @@
                 <tbody>
                 @foreach($activities as $activity)
                     <tr>
+                        <td class="p-0 text-center">
+                            <div class="custom-checkbox custom-control">
+                                <input type="checkbox" data-checkboxes="activityTable" class="custom-control-input deleteMultiple" value="{{ $activity->id }}" id="checkbox-{{ $activity->id }}" name="delete[]">
+                                <label for="checkbox-{{ $activity->id }}" class="custom-control-label">&nbsp;</label>
+                            </div>
+                        </td>
                         <td class="text-center">{{ $activity->id }}</td>
                         <td class="text-capitalize">
                             <span class="btn @if($activity->log_name == "created") btn-success @elseif($activity->log_name == "updated") btn-warning @else btn-danger @endif">

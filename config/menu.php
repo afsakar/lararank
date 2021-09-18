@@ -50,7 +50,7 @@ return [
         ],
     ],
     [
-        'title' => 'User Logs',
+        'title' => 'Kullanıcı Aktiviteleri',
         'gate' => 'activities',
         'route' => 'activities.index',
         'is_active' => 'activities*',
@@ -63,7 +63,7 @@ return [
         ],
     ],
     [
-        'title' => 'Event History',
+        'title' => 'Etkinlik Geçmişi',
         'gate' => 'logs',
         'route' => 'logs.index',
         'is_active' => 'logs*',

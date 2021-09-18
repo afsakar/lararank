@@ -41,28 +41,34 @@ Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => config('
     Route::get('dashboard', [AdminController::class, 'index'])->middleware('PermissionCheck:dashboard,read')->name('dashboard');
 
     /* Users */
-    Route::get('/users', [UserController::class, 'index'])->middleware('PermissionCheck:users,read')->name('users.index');
-    Route::get('/profile', [UserController::class, 'profile'])->name('users.profile');
-    Route::get('users/{id}', [UserController::class, 'destroy'])->whereNumber('id')->middleware('PermissionCheck:users,delete')->name('users.destroy');
-    Route::get('/users/create', [UserController::class, 'create'])->middleware('PermissionCheck:users,create')->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->middleware('PermissionCheck:users,store')->name('users.store');
-    Route::get('users/{id}/edit', [UserController::class, 'edit'])->whereNumber('id')->middleware('PermissionCheck:users,edit')->name('users.edit');
-    Route::put('users/{id}', [UserController::class, 'update'])->whereNumber('id')->middleware('PermissionCheck:users,update')->name('users.update');
+    Route::group(['prefix' => 'users'], function (){
+        Route::get('/', [UserController::class, 'index'])->middleware('PermissionCheck:users,read')->name('users.index');
+        Route::get('/profile', [UserController::class, 'profile'])->name('users.profile');
+        Route::get('/{id}', [UserController::class, 'destroy'])->whereNumber('id')->middleware('PermissionCheck:users,delete')->name('users.destroy');
+        Route::get('/create', [UserController::class, 'create'])->middleware('PermissionCheck:users,create')->name('users.create');
+        Route::post('/', [UserController::class, 'store'])->middleware('PermissionCheck:users,store')->name('users.store');
+        Route::get('/{id}/edit', [UserController::class, 'edit'])->whereNumber('id')->middleware('PermissionCheck:users,edit')->name('users.edit');
+        Route::put('/{id}', [UserController::class, 'update'])->whereNumber('id')->middleware('PermissionCheck:users,update')->name('users.update');
+    });
 
     /* Roles */
-    Route::get('/roles', [RoleController::class, 'index'])->middleware('PermissionCheck:roles,read')->name('roles.index');
-    Route::get('roles/{id}', [RoleController::class, 'destroy'])->whereNumber('id')->middleware('PermissionCheck:roles,delete')->name('roles.destroy');
-    Route::get('/roles/create', [RoleController::class, 'create'])->middleware('PermissionCheck:roles,create')->name('roles.create');
-    Route::post('/roles', [RoleController::class, 'store'])->middleware('PermissionCheck:roles,store')->name('roles.store');
-    Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->whereNumber('id')->middleware('PermissionCheck:roles,edit')->name('roles.edit');
-    Route::put('roles/{id}', [RoleController::class, 'update'])->whereNumber('id')->middleware('PermissionCheck:roles,update')->name('roles.update');
+    Route::group(['prefix' => 'roles'], function (){
+        Route::get('/', [RoleController::class, 'index'])->middleware('PermissionCheck:roles,read')->name('roles.index');
+        Route::get('/{id}', [RoleController::class, 'destroy'])->whereNumber('id')->middleware('PermissionCheck:roles,delete')->name('roles.destroy');
+        Route::get('/create', [RoleController::class, 'create'])->middleware('PermissionCheck:roles,create')->name('roles.create');
+        Route::post('/', [RoleController::class, 'store'])->middleware('PermissionCheck:roles,store')->name('roles.store');
+        Route::get('/{id}/edit', [RoleController::class, 'edit'])->whereNumber('id')->middleware('PermissionCheck:roles,edit')->name('roles.edit');
+        Route::put('/{id}', [RoleController::class, 'update'])->whereNumber('id')->middleware('PermissionCheck:roles,update')->name('roles.update');
+    });
 
     /* Logs */
     Route::get('logs', [LogController::class, 'index'])->middleware('PermissionCheck:logs,read')->name('logs.index');
 
     /* Activities */
-    Route::get('/activities', [ActivityController::class, 'index'])->middleware('PermissionCheck:activities,read')->name('activities.index');
-    Route::get('activities/{id}', [ActivityController::class, 'destroy'])->whereNumber('id')->middleware('PermissionCheck:activities,delete')->name('activities.destroy');
-    Route::get('activities/delete', [ActivityController::class, 'deleteAll'])->middleware('PermissionCheck:activities,delete')->name('activities.deleteAll');
+    Route::group(['prefix' => 'activities'], function (){
+        Route::get('/', [ActivityController::class, 'index'])->middleware('PermissionCheck:activities,read')->name('activities.index');
+        Route::get('/{id}', [ActivityController::class, 'destroy'])->whereNumber('id')->middleware('PermissionCheck:activities,delete')->name('activities.destroy');
+        Route::get('/delete', [ActivityController::class, 'deleteAll'])->middleware('PermissionCheck:activities,delete')->name('activities.deleteAll');
+    });
 
 });
