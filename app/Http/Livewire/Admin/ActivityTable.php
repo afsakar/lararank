@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Activitylog\Models\Activity;
+use App\Models\Activity;
 
 class ActivityTable extends Component
 {
