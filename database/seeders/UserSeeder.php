@@ -15,11 +15,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         \App\Models\User::insert([
-            'name' => 'Azad Furkan ŞAKAR',
-            'email' => 'afsakarr@gmail.com',
+            'name' => 'Super Admin',
+            'email' => 'admin@lararank.com',
             'role_id' => 1,
             'email_verified_at' => now(),
-            'password' => '$2y$10$vRwZk/01LvnHc0SdJ540qu.x4juy7.MTauu7sb5e5PNm0TNzg8VvK',
+            'password' => '$2y$10$ytNS/s.CSs9buM5iMFlsIOBIE/6Vjvv17Opb3Jl8rg/KoTy.DKs0.',
             'remember_token' => Str::random(10),
         ]);
     }
